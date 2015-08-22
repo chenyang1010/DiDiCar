@@ -12,11 +12,10 @@ import android.util.Log;
 
 public class ActionService extends Service {
 
-	private static final String TAG = "ActionLisener";
+	private static final String TAG = "ActionService";
 	private boolean runFlag = true;
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -28,11 +27,11 @@ public class ActionService extends Service {
 			public void run() {
 				try {
 					while(runFlag) {
-						Log.i(TAG, "ActionService-----------------Tap");
+						//Log.i(TAG, "ActionService-----------------Tap");
 						doXue(OrderList.tap);
-						Thread.sleep(1000 * 4);
+						//Thread.sleep(2);
 					}
-				}catch (InterruptedException e) {
+				}catch (Exception e) {
 						e.printStackTrace();
 				}
 					}
@@ -42,14 +41,8 @@ public class ActionService extends Service {
 	@Override
 	public void onDestroy() {
 		runFlag = false;
-		Log.i(TAG, "ActionService-----------------Destroyed");
+		//Log.i(TAG, "ActionService-----------------Destroyed");
 		super.onDestroy();
-	}
-
-	@Override
-	public void onStart(Intent intent, int startId) {
-		// TODO Auto-generated method stub
-		super.onStart(intent, startId);
 	}
 	
 	//点击发送按钮
@@ -65,7 +58,7 @@ public class ActionService extends Service {
 	            BufferedReader err=new BufferedReader(new InputStreamReader(process.getErrorStream()));
 	            String line = null;
 	            dataOut = new DataOutputStream(process.getOutputStream());
-	          //点击发送按钮
+	            //点击发送按钮
 	            for(String order : orders){
 	            	dataOut.writeBytes(order + ";");
 	            }
